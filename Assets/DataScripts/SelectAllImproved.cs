@@ -25,17 +25,17 @@ public class SelectAllImproved : MonoBehaviour
         return allProducts;
         
     }
-    public void SelectAllOrders()
+    public string SelectAllOrders()
     {
         StartCoroutine(SelectAllOrdersC());
 
-        //return allOrders;
+        return allOrders;
     }
-    public void SelectAllInventories()
+    public string SelectAllInventories()
     {
         StartCoroutine(SelectAllInventoriesC());
 
-        //return allInventories;
+        return allInventories;
     }
     public void SelectAllDepartments()
     {

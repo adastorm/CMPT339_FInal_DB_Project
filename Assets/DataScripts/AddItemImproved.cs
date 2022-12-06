@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 using UnityEngine.Networking; 
 
@@ -63,16 +64,34 @@ public class AddItemImproved : MonoBehaviour
 
 
 
-
+    public string RemoveSpecialCharacters(string str) {
+   StringBuilder sb = new StringBuilder();
+   foreach (char c in str) {
+      if ((c >= '0' && c <= '9') || (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') || c == '.' || c == ',' || c == '-' || c =='(' || c== ')' || c == ' ' || c== '\'' || c=='*' || c=='=' || c== '_') {
+         sb.Append(c);
+      }
+   }
+   return sb.ToString();
+}
 
     //insert a new product into product table
     IEnumerator insertProductC(string productIDC, string priceC, string supplierNameC, string skuC, string weightC)
     {
+        
         //create sql query using input strings
-        string sqlString = "INSERT INTO product (ProductID, Price, SupplierName, Weight, SKU) VALUES (" + productIDC + ", " + priceC + ", '" + supplierNameC + "', " + weightC + ", " + skuC + ");";
+        string sqlString = "INSERT INTO product (ProductID, Price, SupplierName, Weight, SKU) VALUES (" + productIDC + ", " + priceC + ", '" + supplierNameC + "', " + weightC + ", " + skuC + ")";
+        sqlString += " ON DUPLICATE KEY UPDATE Price = Values(Price), SupplierName =Values(SupplierName), Weight = VALUES(Weight), SKU = VALUES(SKU);";
 
+
+       // string sqlString = "IF EXISTS (SELECT * FROM product WHERE ProductId =" + productIDC + ")"; 
+        //sqlString += " Begin Update product set Price = "+priceC+", SupplierName = "+supplierNameC + ", Weight ="+ weightC + ", SKU = "+ skuC+" where productID = "+productIDC + " END";
+       // sqlString += " ELSE BEGIN INSERT INTO product (ProductID, Price, SupplierName, Weight, SKU) VALUES (" + productIDC + ", " + priceC + ", '" + supplierNameC + "', " + weightC + ", " + skuC + ") END;";
+
+    sqlString = RemoveSpecialCharacters(sqlString);
+        //sqlString = "INSERT INTO product (ProductID, Price, SupplierName, Weight, SKU) VALUES (12345, 23.00, 'asdasd', 123.10, 123123123)";
         //debug message
         Debug.Log("Run Query: " + sqlString);
+
 
         //pass queryString to php script
         WWWForm form = new WWWForm();
@@ -107,8 +126,9 @@ public class AddItemImproved : MonoBehaviour
     IEnumerator insertOrderC(string supplierNameC, string orderPriceC, string countC, string dateOrderedC, string orderIDC)
     {
         //create sql query using input strings
-        string sqlString = "INSERT INTO _order (supplierName, orderPrice, count, dateOrdered, OrderID) VALUES (" + "'" + supplierNameC + "', " + orderPriceC + ", " + countC + ", '" + dateOrderedC + "', " + orderIDC + ");";
-        
+        string sqlString = "INSERT INTO _order (OrderID, SupplierName, OrderPrice, Count, DateOrdered) VALUES (" + orderIDC + ", " + supplierNameC + ", '" + orderPriceC + "', " + countC + ", " + dateOrderedC + ")";
+        sqlString += " ON DUPLICATE KEY UPDATE SupplierName = Values(SupplierName), OrderPrice =Values(OrderPrice), Count = VALUES(Count), DateOrdered = VALUES(DateOrdered);";
+        sqlString = RemoveSpecialCharacters(sqlString);
         //debug message
         Debug.Log("Run Query: " + sqlString);
 
@@ -143,8 +163,10 @@ public class AddItemImproved : MonoBehaviour
     IEnumerator insertInventoryC(string inventoryIDC, string departmentIDC, string _nameC, string countC, string costC)
     {
         //create sql query using input strings
-        string sqlString = "INSERT INTO inventory (inventoryID, departmentID, _name, count, cost) VALUES (" + inventoryIDC + ", " + departmentIDC + ", '" + _nameC + "', " + countC + ", " + costC + ");";
-
+        string sqlString = "INSERT INTO Inventory (InventoryID, DepartmentID, _Name, Count, Cost) VALUES (" + inventoryIDC + ", " + departmentIDC + ", '" + _nameC + "', " + countC + ", " + costC + ")";
+        sqlString += " ON DUPLICATE KEY UPDATE DepartmentID = Values(DepartmentID), _Name = Values(_Name), Count = VALUES(Count), Cost = VALUES(Cost);";
+        
+        sqlString = RemoveSpecialCharacters(sqlString);
         //debug message
         Debug.Log("Run Query: " + sqlString);
 
