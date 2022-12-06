@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System;
 
 public class DataDriver : MonoBehaviour
 {
@@ -20,7 +21,11 @@ private void Start()
 {
     //PrintSortedTable(SortTableData(_dataIn, 5), 5);
     //Debug.Log(SortTableData(_dataIn, 5));
-    Debug.Log(_returnDimension(SortTableData(_dataIn, 5))[0] + " " + _returnDimension(SortTableData(_dataIn, 5))[1]);
+    string data = datadriver.GetComponent<SelectAllImproved>().SelectAllProducts();
+    //string data1 = datadriver.GetComponent<SelectAllImproved>().SelectAllInventories();
+    //string data2 = datadriver.GetComponent<SelectAllImproved>().SelectAllOrders();
+    
+
 }
 
 /// <summary>
@@ -29,18 +34,18 @@ private void Start()
 /// <param name="data">The string containing all the data from a relation</param>
 /// <param name="degree">The degree of a relation or how many attributes it has</param>
 /// <returns>A list that holds all the tuples as arrays</returns>
-public string[,] SortTableData(string data, int degree)
+public string[,] SortTableData(string data)
 {
-    string[] newData = data.Split("-");
-    string[,] sortedData = new string[(newData.Length/degree),degree];
-    string[] tempData = new string[degree];
-    int counter = 0;
-    for (int i = 0; i < (newData.Length / degree); i++)
+    string[] newData = data.Split(new string[] { "\r\n", "\r", "\n" ,"/n","/r"}, StringSplitOptions.None);
+    int dLength = newData.Length - 1;
+    int degree = newData[0].Split("-").Length;
+    string[,] sortedData = new string[dLength,degree];
+    for (int i = 0; i < dLength; i++)
     {
+        string[] tempData = newData[i].Split("-");
         for (int j = 0; j < degree; j++)
         {
-            sortedData[i, j] = newData[counter];
-            counter++;
+            sortedData[i, j] = tempData[j];
         }
     }
     return sortedData;
@@ -67,7 +72,7 @@ public void PrintSortedTable(string[,] data)
 }
 
 public void testDriver(){
-    PrintSortedTable( SortTableData(_dataIn, 5));
+    PrintSortedTable( SortTableData(_dataIn));
 }
 
 
@@ -78,84 +83,80 @@ public GameObject prefabIventory;
 public GameObject prefabOrder;
 public GameObject prefabManager;
 
-public GameObject newprefab;
-public int i;
+GameObject newprefab;
+int i;
+ public GameObject ProductParent;
 public void productCreater(){
   
 string data = datadriver.GetComponent<SelectAllImproved>().SelectAllProducts();
+Debug.Log(data);
+string[,] dataArray =  SortTableData(data);
 
-string[,] dataArray =  SortTableData(data, 5);
 
-
-TextMeshProUGUI Name;
-TextMeshProUGUI Price;
-TextMeshProUGUI Weight;
-TextMeshProUGUI SKU;
-TextMeshProUGUI Supplier;
 
 
     for (int i = 0; i <= dataArray.GetUpperBound(0); i++) 
     {
-        newprefab = Instantiate(prefabProduct);
+        
+        newprefab = Instantiate(prefabProduct, ProductParent.transform );
 
-        }
+        
 
         
 
         
         for (int j = 0; j <= dataArray.GetUpperBound(1); j++)
         {
-        foreach (var child in newprefab.transform){
-        if (gameObject.name == "Price")
+            TMP_Text[] productTextArray = newprefab.GetComponentsInChildren<TMP_Text>();
+        for (int p = 0; p < (productTextArray.Length - 1); p++){
+            
+        if (p == 0)
         {
-            TextMeshPro textbox = newprefab.GetComponent<TextMeshPro>();
+           
             if (j==1)
             {
-                string textinternal = dataArray[i, j];
-                textbox.text = textinternal; 
+                Debug.Log(dataArray[i, j]);
+                productTextArray[p].text = dataArray[i, j];
+                
             }
         }
-        if (gameObject.name == "Weight")
+        if (p == 2)
         {
-                        TextMeshPro textbox = newprefab.GetComponent<TextMeshPro>();
+                       
             if (j==3)
             {
-                string textinternal = dataArray[i, j];
-                textbox.text = textinternal; 
+                productTextArray[p].text = dataArray[i, j];
             }
         }
-        if (gameObject.name == "SKU")
+        if (p==3)
         {
-                        TextMeshPro textbox = newprefab.GetComponent<TextMeshPro>();
+                        
             if (j==4)
             {
-                string textinternal = dataArray[i, j];
-                textbox.text = textinternal; 
+                productTextArray[p].text = dataArray[i, j]; 
             }
         }
-        if (gameObject.name == "Name")
+        if (p==4)
         {
-                        TextMeshPro textbox = newprefab.GetComponent<TextMeshPro>();
+                       
             if (j==0)
             {
-                string textinternal = dataArray[i, j];
-                textbox.text = textinternal; 
+                productTextArray[p].text = dataArray[i, j];
             }
         }
-        if (gameObject.name == "Supplier")
+        if (p==5)
         {
-                        TextMeshPro textbox = newprefab.GetComponent<TextMeshPro>();
+                       
             if (j==2)
             {
-                string textinternal = dataArray[i, j];
-                textbox.text = textinternal; 
+                 productTextArray[p].text = dataArray[i, j];
             }
         }
         }
         Debug.Log("\n");
     }
     
-
+    }
 }
 
 

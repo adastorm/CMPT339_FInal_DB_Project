@@ -10,18 +10,20 @@ public class SelectAllImproved : MonoBehaviour
     //
     // '-' is used as separator
     // '/n' is used for each new row
-    public string allProducts;
-    private string allOrders;
-    private string allInventories;
-    private string allDepartments;
+    string allProducts;
+    string allOrders;
+    string allInventories;
+    string allDepartments;
 
 
     //public functions to call coroutines
     public string SelectAllProducts()
     {
+        Debug.Log(allProducts);
         StartCoroutine(SelectAllProductsC());
-
+        Debug.Log(allProducts);
         return allProducts;
+        
     }
     public void SelectAllOrders()
     {
@@ -70,7 +72,7 @@ public class SelectAllImproved : MonoBehaviour
             {
                 //store returned data as a string
                 allProducts = www.downloadHandler.text;
-                Debug.Log(allProducts);
+                Debug.Log("testing: " +allProducts);
             }
         }
     }
