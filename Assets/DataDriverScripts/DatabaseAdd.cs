@@ -21,7 +21,9 @@ public class DatabaseAdd : MonoBehaviour
 
 public GameObject dataDriver;
 
-    // Start is called before the first frame update
+      /**
+     * this class pushed all of the data to the interface to get placed into the database.
+     **/
     void Start()
     {
     

@@ -7,7 +7,10 @@ using System;
 
 public class DataDriver : MonoBehaviour
 {
-
+   /**
+     * this class drive all the instantiation of our database assets aswell as basic editing of the data. 
+     * it also provides all the game objects and text editing so the user can view all the different pieces of the System. based on veiws
+     **/
 
     
 public GameObject datadriver;
@@ -21,15 +24,6 @@ public GameObject prefabManager;
  
 GameObject newprefab;
 int i;
-    // Start is called before the first frame update
-private string _dataIn = "1_1.99_GermanBakery_1234567890_22.01_" +
-                        "11_2.99_GermanBakery_1234567891_22.02_" +
-                        "12_2.99_GermanBakery_1234567892_22.03_" +
-                        "13_2.99_GermanBakery_1234567893_22.04_" +
-                        "10001_2.99_DairyLand_1234567894_22.05_" +
-                        "10002_2.99_DairyLand_1234567894_23.09_" +
-                        "10003_3.54_DairyLand_1234567895_25.22_" +
-                        "10004_2.99_DairyLand_1234567896_420.69";
 
 private void Start()
 {
@@ -84,7 +78,7 @@ public void PrintSortedTable(string[,] data)
         Debug.Log("\n");
     }
 }
-
+//drivers that are calle don button press
 public void testDriver(){
     productCreater();
     inventory();
@@ -100,7 +94,7 @@ public void customerDriver(){
 }
 
 
-
+//only displays customer data
 public void customerView(){
 
   
@@ -179,7 +173,7 @@ string[,] dataArray =  SortTableData(data1);
     }
 }
 
-
+//displays all product data when called
 public void productCreater(){
   
 string data = datadriver.GetComponent<SelectAllImproved>().SelectAllProducts();
@@ -257,7 +251,7 @@ string[,] dataArray =  SortTableData(data);
     }
 }
 
-
+//displays all inventory data when called
 public void inventory()
 {
   
@@ -334,6 +328,8 @@ string[,] dataArray =  SortTableData(data1);
     }
 }
 
+
+//displays all orders when run, by iterating through the 2 dimensional array
 public void orderCreator(){
      
 string data2 = datadriver.GetComponent<SelectAllImproved>().SelectAllOrders();

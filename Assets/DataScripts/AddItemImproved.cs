@@ -63,15 +63,15 @@ public class AddItemImproved : MonoBehaviour
 
 
 
-
+//string cleaner, removes all funky characters to allow sql statments to be clean and input correctly
     public string RemoveSpecialCharacters(string str) {
-   StringBuilder sb = new StringBuilder();
+   StringBuilder x = new StringBuilder();
    foreach (char c in str) {
       if ((c >= '0' && c <= '9') || (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') || c == '.' || c == ',' || c == '-' || c =='(' || c== ')' || c == ' ' || c== '\'' || c=='*' || c=='=' || c== '_') {
-         sb.Append(c);
+         x.Append(c);
       }
    }
-   return sb.ToString();
+   return x.ToString();
 }
 
     //insert a new product into product table
@@ -79,6 +79,7 @@ public class AddItemImproved : MonoBehaviour
     {
         
         //create sql query using input strings
+        //edited the sql statements to include duplicate key detection so it will be considered updating and editing.
         string sqlString = "INSERT INTO product (ProductID, Price, SupplierName, Weight, SKU) VALUES (" + productIDC + ", " + priceC + ", '" + supplierNameC + "', " + weightC + ", " + skuC + ")";
         sqlString += " ON DUPLICATE KEY UPDATE Price = Values(Price), SupplierName =Values(SupplierName), Weight = VALUES(Weight), SKU = VALUES(SKU);";
 
@@ -126,6 +127,7 @@ public class AddItemImproved : MonoBehaviour
     IEnumerator insertOrderC(string supplierNameC, string orderPriceC, string countC, string dateOrderedC, string orderIDC)
     {
         //create sql query using input strings
+        //edited the sql statements to include duplicate key detection so it will be considered updating and editing.
         string sqlString = "INSERT INTO _order (OrderID, SupplierName, OrderPrice, Count, DateOrdered) VALUES (" + orderIDC + ", " + supplierNameC + ", '" + orderPriceC + "', " + countC + ", " + dateOrderedC + ")";
         sqlString += " ON DUPLICATE KEY UPDATE SupplierName = Values(SupplierName), OrderPrice =Values(OrderPrice), Count = VALUES(Count), DateOrdered = VALUES(DateOrdered);";
         sqlString = RemoveSpecialCharacters(sqlString);
@@ -163,6 +165,7 @@ public class AddItemImproved : MonoBehaviour
     IEnumerator insertInventoryC(string inventoryIDC, string departmentIDC, string _nameC, string countC, string costC)
     {
         //create sql query using input strings
+        //edited the sql statements to include duplicate key detection so it will be considered updating and editing.
         string sqlString = "INSERT INTO Inventory (InventoryID, DepartmentID, _Name, Count, Cost) VALUES (" + inventoryIDC + ", " + departmentIDC + ", '" + _nameC + "', " + countC + ", " + costC + ")";
         sqlString += " ON DUPLICATE KEY UPDATE DepartmentID = Values(DepartmentID), _Name = Values(_Name), Count = VALUES(Count), Cost = VALUES(Cost);";
         
