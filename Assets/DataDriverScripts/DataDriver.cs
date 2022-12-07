@@ -97,14 +97,14 @@ public void customerDriver(){
 //only displays customer data
 public void customerView(){
 
-  
+  //calls data from the database connection then puts it into a 2d array
 string data1 = datadriver.GetComponent<SelectAllImproved>().SelectAllProducts();
 
 string[,] dataArray =  SortTableData(data1);
 
 
 
-
+//we iterate through the 2d array and then creates the fields then edits the text within the prefabs
     for (int i = 0; i <= dataArray.GetUpperBound(0); i++) 
     {
         
@@ -173,7 +173,7 @@ string[,] dataArray =  SortTableData(data1);
     }
 }
 
-//displays all product data when called
+//displays all product data when called by iterating through a 2d array and then createing an object and populating it with the data from the table
 public void productCreater(){
   
 string data = datadriver.GetComponent<SelectAllImproved>().SelectAllProducts();
@@ -251,7 +251,7 @@ string[,] dataArray =  SortTableData(data);
     }
 }
 
-//displays all inventory data when called
+//displays all product data when called by iterating through a 2d array and then createing an object and populating it with the data from the table
 public void inventory()
 {
   

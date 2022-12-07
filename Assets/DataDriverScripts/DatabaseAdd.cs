@@ -29,6 +29,14 @@ public GameObject dataDriver;
     
     }
 
+    public void remove()
+    {
+    string ID = IDbox.text.Trim();   
+
+     dataDriver.GetComponent<RemoveItem>().removeEntry(ID,"product");
+     dataDriver.GetComponent<RemoveItem>().removeEntry(ID,"inventory");
+    }
+
     public void CreateEntries()
     {
         

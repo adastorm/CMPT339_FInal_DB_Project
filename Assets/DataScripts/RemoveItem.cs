@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -38,7 +39,15 @@ public class RemoveItem : MonoBehaviour
 
 
 
-
+    public string RemoveSpecialCharacters(string str) {
+   StringBuilder x = new StringBuilder();
+   foreach (char c in str) {
+      if ((c >= '0' && c <= '9') || (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') || c == '.' || c == ',' || c == '-' || c =='(' || c== ')' || c == ' ' || c== '\'' || c=='*' || c=='=' || c== '_') {
+         x.Append(c);
+      }
+   }
+   return x.ToString();
+}
 
     //takes in product id to be removed and the table all matching ids should be removed from
     IEnumerator removeEntryC(string idValueC, string tableNameC)
@@ -72,7 +81,7 @@ public class RemoveItem : MonoBehaviour
 
         //create delete query
         string sqlString = "DELETE FROM " + tableNameC + " WHERE " + columnNameID + " = " + idValueC + ";";
-        
+        sqlString = RemoveSpecialCharacters(sqlString);
         //debug message
         Debug.Log("Run Query: " + sqlString);
 
