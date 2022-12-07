@@ -21,7 +21,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1342895801766528171, guid: ff85fced0efa01f4b82a79078d1b7457, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1342895801766528171, guid: ff85fced0efa01f4b82a79078d1b7457, type: 3}
       propertyPath: m_AnchorMax.y
@@ -33,15 +33,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1342895801766528171, guid: ff85fced0efa01f4b82a79078d1b7457, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1342895801766528171, guid: ff85fced0efa01f4b82a79078d1b7457, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0.00024414
+      value: 1920.0002
       objectReference: {fileID: 0}
     - target: {fileID: 1342895801766528171, guid: ff85fced0efa01f4b82a79078d1b7457, type: 3}
       propertyPath: m_SizeDelta.y
-      value: -642.189
+      value: 140.6353
       objectReference: {fileID: 0}
     - target: {fileID: 1342895801766528171, guid: ff85fced0efa01f4b82a79078d1b7457, type: 3}
       propertyPath: m_LocalPosition.x
@@ -73,11 +73,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1342895801766528171, guid: ff85fced0efa01f4b82a79078d1b7457, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 960
       objectReference: {fileID: 0}
     - target: {fileID: 1342895801766528171, guid: ff85fced0efa01f4b82a79078d1b7457, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 321.0945
+      value: -70.31766
       objectReference: {fileID: 0}
     - target: {fileID: 1342895801766528171, guid: ff85fced0efa01f4b82a79078d1b7457, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -93,7 +93,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6799230989897687209, guid: ff85fced0efa01f4b82a79078d1b7457, type: 3}
       propertyPath: m_Name
-      value: DataPrefab
+      value: DataPrefab Variant
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ff85fced0efa01f4b82a79078d1b7457, type: 3}

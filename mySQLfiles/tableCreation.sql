@@ -1,29 +1,35 @@
-CREATE TABLE product (
-	ProductID INT(6) NOT NULL,
-	Price DEC(11,2) UNSIGNED NOT NULL,
-    SupplierName VARCHAR(1024) NOT NULL,
-    Weight DEC(8,2) UNSIGNED,
-    SKU INT(10) UNSIGNED NOT NULL
-);
-
 CREATE TABLE inventory (
-    InventoryID INT(6) NOT NULL,
-	_Name VARCHAR(1024) NOT NULL,
-    Count INT(9) UNSIGNED NOT NULL DEFAULT 0,
-    DepartmentID VARCHAR(1024) NOT NULL,
-    Cost DEC(11,2) UNSIGNED NOT NULL
+    InventoryID INT UNSIGNED NOT NULL,
+    DepartmentID INT UNSIGNED NOT NULL,
+    _Name VARCHAR(64) NOT NULL,
+    Count INT UNSIGNED NOT NULL,
+    Cost DECIMAL(11,2) NOT NULL
 );
 
 CREATE TABLE department (
-	DepartmentID INT(6) NOT NULL,
-	DepartmentName VARCHAR(1024) NOT NULL,
-    DepartmentManager VARCHAR(1024) NOT NULL
+    DepartmentID INT UNSIGNED NOT NULL,
+    DepartmentName VARCHAR(24) NOT NULL,
+    DepartmentManager VARCHAR(24) NOT NULL
+);
+
+CREATE TABLE databaseInterface (
+    ID INT UNSIGNED NOT NULL,
+    _name VARCHAR(24) NOT NULL,
+    price DECIMAL(8,2) NOT NULL
 );
 
 CREATE TABLE _order (
-	OrderID INT(6) NOT NULL,
-    SupplierName VARCHAR(1024) NOT NULL,
-    OrderPrice DEC(11,2) NOT NULL,
-    Count INT(9) NOT NULL,
+    OrderID INT UNSIGNED NOT NULL,
+    SupplierName VARCHAR(100) NOT NULL,
+    OrderPrice DECIMAL(9,2) NOT NULL,
+    Count INT UNSIGNED NOT NULL,
     DateOrdered DATE NOT NULL
 );
+CREATE TABLE product (
+    ProductID INT UNSIGNED NOT NULL,
+    Price DECIMAL(9,2) NOT NULL,
+    SupplierName VARCHAR(100) NOT NULL,
+    Weight DECIMAL(8,2),
+    SKU INT(8) UNSIGNED NOT NULL
+);
+

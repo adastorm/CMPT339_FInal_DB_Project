@@ -80,12 +80,24 @@ public void PrintSortedTable(string[,] data)
 }
 //drivers that are calle don button press
 public void testDriver(){
+
     productCreater();
+   
+      
+
     inventory();
+  
+       
+
     orderCreator();
+     
 }
 public void cashierdriver(){
+
     productCreater();
+    
+       
+
     inventory();
 }
 
